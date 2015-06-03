@@ -3,10 +3,11 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
+    'name'=>'เงินเดือนออนไลน์',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language'=>'th',
+    'language' => 'th',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -15,10 +16,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        /*'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],*/
+        /* 'user' => [
+          'identityClass' => 'app\models\User',
+          'enableAutoLogin' => true,
+          ], */
         'user' => [
             'class' => 'amnah\yii2\user\components\User',
         ],
@@ -45,17 +46,19 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\DbManager'
         ],
-        'urlManager'=>[
-            'enablePrettyUrl'=>true,
-            'showScriptName'=>false,
-        ]
+        
+    /* 'urlManager'=>[
+      'enablePrettyUrl'=>true,
+      'showScriptName'=>false,
+      ] */
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            'admin/*', // add or remove allowed actions to this list
-            'site/*',
             'user/*',
+            'site/*',
+            'smonthlist/*',
+            'admin/*', 
             'gii/*',
             'report/*',
             'gridview/*',
@@ -63,26 +66,35 @@ $config = [
             'base/*',
             'map/*',
             'debug/*',
-            'upload/*'
+            'upload/*',
+            'logshow/*',
+            'finsearch/*',
+            'setting/*',
+            'test/*',
+            'pdfreport/*',
+            'user/admin',
+            'printslip/*'
+           
         ]
     ],
+   
     'modules' => [
         'user' => [
             'class' => 'amnah\yii2\user\Module',
-            // set custom module properties here ...
+        // set custom module properties here ...
         ],
         'admin' => [
             'class' => 'mdm\admin\Module',
             //'layout' => 'left-menu', 
             'controllerMap' => [
-                 'assignment' => [
+                'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
                     'userClassName' => 'amnah\yii2\user\models\User',
                     'idField' => 'id', // id field of model User
                 ]
             ],
         ],
-        'gridview' =>  [
+        'gridview' => [
             'class' => '\kartik\grid\Module'
         ],
         'report' => [
@@ -94,8 +106,8 @@ $config = [
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = 'yii\debug\Module';
+    //$config['bootstrap'][] = 'debug';
+    //$config['modules']['debug'] = 'yii\debug\Module';
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = 'yii\gii\Module';

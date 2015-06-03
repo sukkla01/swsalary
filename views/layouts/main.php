@@ -4,7 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use kongoon\theme\material;
-//use app\assets\AppAsset;
+use app\assets\AppAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -28,29 +28,38 @@ material\MaterialAsset::register($this);
     <div class="wrap">
         <?php
             NavBar::begin([
-                'brandLabel' => 'MOPH Report',
+                'brandLabel' => '<span class="glyphicon glyphicon-phone"> ระบบเงินเดือนออนไลน์</span>',
+                //'brandLabel' => 'ระบบเงินเดือนออนไลน์',
                 'brandUrl' => Yii::$app->homeUrl,
                 'options' => [
-                    'class' => 'navbar-default navbar-fixed-top',
+                    'class' => 'navbar-info navbar-fixed-top',
                 ],
             ]);
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'หน้าหลัก', 'url' => ['/site/index']],
-                    ['label' => 'รายงาน',
+                    ['label' => 'เมนู',
                         'items'=>[
-                            ['label'=>'รายงาน1','url'=>['/report/report/report1']],
-                            ['label'=>'รายงาน2','url'=>['/report/report/report2']],
-                            ['label'=>'รายงาน3','url'=>['/report/report/report3']],
+                            ['label'=>'ดูเงินเดือน','url'=>['/smonthlist/smonth']],
+                            ['label'=>'######### เจ้าหน้าที่การเงิน ###########'],
+                            ['label'=>'ค้นหาเจ้าหน้าที่','url'=>['/finsearch']],
+                            ['label'=>'นำเข้าข้อมูลกรมบัญชีกลาง','url'=>['/upload/upload']],
+                            ['label'=>'นำเข้าข้อมูลจากโรงพยาบาล','url'=>['/upload/uploadsw']],
+                            ['label'=>'ประมวลผลรายงาน','url'=>['/process/process1']],
+                            ['label'=>'พิมพิ์รายงานเงินเดือนทั้งหมด','url'=>['printslip/']],
+                            
+                            ['label'=>'########## Administrator ##########'],
+                            ['label'=>'ตั่งค่าทั่วไป','url'=>['/setting']],
+                          
                         ]
                     ],
                     ['label' => 'เกี่ยวกับเรา', 'url' => ['/site/about']],
-                    ['label' => 'ติดต่อ', 'url' => ['/site/contact']],
-                    ['label' => 'User', 'url' => ['/user']],
+                    //['label' => 'ติดต่อ', 'url' => ['/site/contact']],
+                  
                     Yii::$app->user->isGuest ?
                         ['label' => 'เข้าสู่ระบบ', 'url' => ['/user/login']] :
-                        ['label' => 'ออกจากระบบ (' . Yii::$app->user->displayName . ')',
+                        ['label' => 'ออกจากระบบ (' . Yii::$app->user->displayName. ')',
                             'url' => ['/user/logout'],
                             'linkOptions' => ['data-method' => 'post']],
                 ],
@@ -73,13 +82,21 @@ foreach(Yii::$app->session->getAllFlashes() as $key=>$message){
         </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer container">
         <div class="container">
-            <p class="pull-left">&copy; MOPH <?= date('Y') ?></p>
+            <p class="pull-left">&copy; โรงพยาบาลศรีสังวรสุโขทัย <?= date('Y') ?></p>
             <p class="pull-right"><?= Yii::powered() ?></p>
         </div>
     </footer>
 
+    <!--<div class="navbar-fixed-bottom">
+        <div class="container">
+           <p class="pull-left"></p>
+          
+            <p class="pull-right"></p>
+        </div>
+    </div>-->
+    
 <?php $this->endBody() ?>
 </body>
 </html>
